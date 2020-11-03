@@ -14,6 +14,12 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from 'serviceWorker';
 import 'sanitize.css/sanitize.css';
 
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
+
+
+
+
 // Import root app
 import { App } from 'app';
 
@@ -24,19 +30,22 @@ import { configureAppStore } from 'store/configureStore';
 // Initialize languages
 import './locales/i18n';
 
-const store = configureAppStore();
+//const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
-
+//let persistor = persistStore(store);
+const { store, persistor } = configureAppStore();
 interface Props {
   Component: typeof App;
 }
 const ConnectedApp = ({ Component }: Props) => (
   <Provider store={store}>
-    <HelmetProvider>
-      <React.StrictMode>
-        <Component />
-      </React.StrictMode>
-    </HelmetProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <HelmetProvider>
+        <React.StrictMode>
+          <Component />
+        </React.StrictMode>
+      </HelmetProvider>
+      </PersistGate>
   </Provider>
 );
 const render = (Component: typeof App) => {

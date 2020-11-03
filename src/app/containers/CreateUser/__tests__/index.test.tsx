@@ -5,18 +5,18 @@ import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
-import { Lambda } from '..';
+import { CreateUser } from '..';
 
 const renderComponent = (store: Store) =>
   render(
     <Provider store={store}>
       <HelmetProvider>
-        <Lambda />
+        <CreateUser />
       </HelmetProvider>
     </Provider>,
   );
 
-describe('<Lambda />', () => {
+describe('<CreateUser />', () => {
   let store: ReturnType<typeof configureAppStore>;
 
   beforeEach(() => {

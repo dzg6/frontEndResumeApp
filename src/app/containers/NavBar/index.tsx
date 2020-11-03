@@ -8,6 +8,7 @@ import React, { memo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
+import {   BrowserRouter as Router, NavLink } from "react-router-dom";
 
 interface Props {}
 
@@ -17,19 +18,12 @@ export const NavBar = memo((props: Props) => {
 
   return (
     <>
-      <Helmet>
-        <title>NavBar</title>
-        <meta name="description" content="Description of NavBar" />
-      </Helmet>
       <Div>
-      <Link
-      href="/">
-      Home
-      </Link>
-      <Link
-      href="/lambda">
-      Lambda
-      </Link>
+        
+      <NavLink
+      to="/">
+      <Text>Home</Text>
+      </NavLink>
       </Div>
     </>
   );
@@ -38,10 +32,10 @@ export const NavBar = memo((props: Props) => {
 const Div = styled.div`
 background-color:yellow;
   margin-top:20px;
-      text-align: -webkit-center;
+      text-align: center;
 `;
 
-const Link = styled.a`
+const Text = styled.a`
   color: ${p => p.theme.primary};
   cursor: pointer;
   text-decoration: none;

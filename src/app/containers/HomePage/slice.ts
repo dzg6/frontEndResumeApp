@@ -4,12 +4,12 @@ import { ContainerState } from './types';
 
 // The initial state of the Login container
 export const initialState: ContainerState = {
-  username: 'f',
-  password: 'd',
+  // username: 'f',
+  // password: 'd',
 };
 
 const loginSlice = createSlice({
-  name: 'login',
+  name: 'homepage',
   initialState,
   reducers: {
     submitLogin(state, action: PayloadAction<any>) {},

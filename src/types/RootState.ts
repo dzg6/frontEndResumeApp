@@ -1,5 +1,5 @@
-import { LambdaState } from 'app/containers/Lambda/types';
 import { LoginState } from 'app/containers/Login/types';
+import { HomePageState } from 'app/containers/HomePage/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -7,7 +7,7 @@ import { LoginState } from 'app/containers/Login/types';
   You have to declare them here manually
 */
 export interface RootState {
-  lambda?: LambdaState;
   login?: LoginState;
+  homepage?: HomePageState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

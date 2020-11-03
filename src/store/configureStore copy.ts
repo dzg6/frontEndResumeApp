@@ -5,15 +5,14 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createInjectorsEnhancer, forceReducerReload } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
-import hardSet from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1'
+
 import { createReducer } from './reducers';
 
 
 //PERSISTANT STORAGE
-import { createMigrate, persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage/session'; // defaults to localStorage for web
-import AsyncStorage from '@react-native-community/async-storage';
-
+import { createMigrate, persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 
 const migrations = {
@@ -32,14 +31,14 @@ const migrations = {
   }
 };
 
-
-const persistConfig = {
-  key: 'root',
-  storage: storage,
-  version: 0,
-  whitelist: ['login']
-  // migrate: createMigrate(migrations, { debug: true })
-}
+//PSTATE
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   version: 0,
+//   stateReconciler: autoMergeLevel1,
+//   migrate: createMigrate(migrations, { debug: true })
+// }
 
 
 export function configureAppStore() {
@@ -57,27 +56,29 @@ export function configureAppStore() {
     }),
   ];
 
-   const persistedReducer = persistReducer(persistConfig, createReducer());
+  //  const persistedReducer = persistReducer(persistConfig, createReducer());
 
   const store = configureStore({
-    reducer: persistedReducer,
+    reducer: createReducer(),
     middleware: [...getDefaultMiddleware(), ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });
-  let persistor = persistStore(store);
+  let persistor = persistStore(store)
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-            // This fetch the new state of the above reducers.
-            const nextRootReducer = require('./reducers').default
-            store.replaceReducer(
-              persistReducer(persistConfig, nextRootReducer)
-            )
 
-      //forceReducerReload(store);
+      //PSTATE
+            // // This fetch the new state of the above reducers.
+            // const nextRootReducer = require('./reducers').default
+            // store.replaceReducer(
+            //   persistReducer(persistConfig, nextRootReducer)
+            // )
+
+      forceReducerReload(store);
     });
   }
 
