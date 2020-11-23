@@ -97,8 +97,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run checkTs && lint-staged"
-    }
   },
   "jest": {
     "collectCoverageFrom": [
