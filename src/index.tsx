@@ -15,8 +15,6 @@ import * as serviceWorker from 'serviceWorker';
 import 'sanitize.css/sanitize.css';
 
 import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist'
-
 
 
 
@@ -26,6 +24,7 @@ import { App } from 'app';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
+
 
 // Initialize languages
 import './locales/i18n';

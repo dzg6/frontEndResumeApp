@@ -1,37 +1,35 @@
 /**
  *
- * User
- *
+ * Authenicate User
+ * This index is used for debugging
+ * Login and Logout hold majority of the code
  */
 
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
-
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
-import { selectUser } from './selectors';
-import { userSaga } from './saga';
 
-interface Props {}
+//Authenicate User State
+import { selectUsername, selectAuthenicated, selectStatus } from './selectors';
+import { reducer, sliceKey} from './slice';
 
-export function User(props: Props) {
+
+export function AuthenicateUser() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: userSaga });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const user = useSelector(selectUser);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
+  const username = useSelector(selectUsername);
+  const status = useSelector(selectStatus);
+  const isAuthenicated = useSelector(selectAuthenicated);
+
 
   return (
     <>
-      <Helmet>
-        <title>User</title>
-        <meta name="description" content="Description of User" />
-      </Helmet>
-      <Div></Div>
+      <Div>
+              Username: {username} <br />
+              Status: {status.msg} <br />
+              Authenicated: {isAuthenicated.toString()}
+      </Div>
     </>
   );
 }

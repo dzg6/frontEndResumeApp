@@ -1,8 +1,15 @@
-/* --- STATE --- */
+/**
+ *
+ * Authenicate User State
+ * 
+ */
 export interface UserState {
     username:string;
     password: string;
-    status: object;
+    email: string;
+    status:{
+        msg:string,
+    };
     isAuthenicated: boolean;
 }
 

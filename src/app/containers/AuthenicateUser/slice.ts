@@ -1,3 +1,8 @@
+/**
+ *
+ * Authenicate User Slice
+ * 
+ */
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState } from './types';
@@ -6,22 +11,28 @@ import { ContainerState } from './types';
 export const initialState: ContainerState = {
   username: 'empty',
   password: 'empty',
+  email: 'empty',
   status: {msg: 'empty'},
   isAuthenicated: false,
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: 'authenicateUser',
   initialState,
   reducers: {
+
     userLoggedIn(state, action: PayloadAction<any>) {
-      console.log('autheicated user');
       state.status = action.payload.status;
-       state.username = action.payload.username;
+      state.username = action.payload.username;
+      state.email = action.payload.email;
       state.isAuthenicated = action.payload.isAuthenicated;
     },
-    submitLogin(state, action: PayloadAction<any>) {},
-    logout(state, action: PayloadAction<string>) {
+
+    submitLogin() {
+      //Does not modify the state
+    },
+
+    logout(state) {
       state.username = "";
       state.isAuthenicated = false;
     },

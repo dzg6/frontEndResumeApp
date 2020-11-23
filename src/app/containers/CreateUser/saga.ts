@@ -1,14 +1,31 @@
- import { take, call, put, select, takeLatest } from 'redux-saga/effects';
- import { actions } from './slice';
- import { request } from 'utils/request';
+  /**
+ *
+ * Create User Saga
+ *
+ */
+import { take, call, put, select, takeLatest } from 'redux-saga/effects';
+import { actions } from './slice';
+import { request } from 'utils/request';
 
- export function* createUser(user) {
+interface User {
+  payload:{
+    username:string,
+    password:string,
+    email:string
+  };
+}
 
-  const userParsed = JSON.parse(user.payload)
+ export function* createUser(user:User) {
+
+  const userParsed = JSON.parse(user.payload);
+  
   const username: string = userParsed.username;
   const password: string = userParsed.password;
   const email: string = userParsed.email;
 
+  console.log(username);
+
+  // TODO Encrypt PASSWORD
 
   const requestURL = 'https://cors-anywhere.herokuapp.com/https://ou68ef4vrb.execute-api.us-east-1.amazonaws.com/prod/' + username;
 
@@ -28,23 +45,23 @@
     redirect:'follow',
     body:JSON.stringify(bodyParse),
   };
-  //console.log(JSON.stringify(bodyParse));
+
   try {
-   // Call our request helper (see 'utils/request')
+    // Call our request helper (see 'utils/request')
+    //fetches and returns JSON response
    const repos = yield call(request, requestURL, options);
-   console.log("HERE");
-   console.log(repos);
-   
-   //if(repos.username === username){
-    // yield put(actions.userLoggedIn(repos));
-  // }
+
+   //TODO Pass on success or Collect Error message
+   // yield put(actions.userLoggedIn(user));
+
+
   }catch (err) {
-   console.log(err);
+
    if (err.response?.status === 404) {
     // yield put(actions.repoError(RepoErrorType.USER_NOT_FOUND));
    }
-  }
 
+  }
  }
 
 export function* createUserSaga() {

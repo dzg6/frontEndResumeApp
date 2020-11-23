@@ -29,7 +29,6 @@ function parseJSON(response: Response) {
  * @return {object|undefined} Returns either the response, or throws an error
  */
 function checkStatus(response: Response) {
-  console.log(response.status)
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -47,23 +46,22 @@ function checkStatus(response: Response) {
  * @return {object}           The response data
  */
 export async function request(
-  url: string,
-  options?: RequestInit,
-): Promise<{} | { err: ResponseError }> {
+//   url: string,
+//   options?: RequestInit,
+// ): Promise<{} | { err: ResponseError }> {
+  url,
+  options,
+){
 
-// //  To DELETE LATER -----------------------------------
-      console.log("-----REQ-------");
-      console.log(url);
-      console.log(options);
-      console.log("------------");
-// // ----------------------------------------------------
+// // //  To DELETE LATER -----------------------------------
+//       console.log("-----REQ-------");
+//       console.log(url);
+//       console.log(options);
+//       console.log("------------");
+// // // ----------------------------------------------------
 
   const fetchResponse = await fetch(url, options);
   const response = checkStatus(fetchResponse);
-
-  // //  To DELETE LATER -----------------------------------
-  console.log(response);
-  // // ----------------------------------------------------
 
   return parseJSON(response);
 }

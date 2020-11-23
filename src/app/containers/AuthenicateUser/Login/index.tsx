@@ -1,38 +1,55 @@
 /**
  *
- * Login
+ * Login Form
  *
  */
-
+//App Imports
 import React, { useState }  from 'react';
 import { Helmet } from 'react-helmet-async'
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components/macro';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey, actions } from '../slice';
-import { loginSaga } from './saga';
+import styled from 'styled-components/macro';
 import {  useHistory } from "react-router-dom";
 
-import {  Link } from "../../../components/Link";
+//Container Imports
+import { reducer, sliceKey, actions } from '../slice';
+import { loginSaga } from './saga';
+
+//Component Imports
+import {  Link } from "app/components/Link";
+import {  Input } from "app/components/Input";
+import {  Button } from "app/components/Button";
+import {  Form } from "app/components/Form";
 
 export function Login () {
+
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: loginSaga });
 
+
+  /*### React Hooks v 16.8
+      https://reactjs.org/docs/hooks-intro.html
+  */
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  let history = useHistory();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+
+    /*### Form Submit Function
+      https://react-redux.js.org/7.1/api/hooks#usedispatch
+      https://reactrouter.com/web/api/history
+  */
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const onLogin = (e) => {
     e.preventDefault();
     e.target.reset();
-     dispatch(actions.submitLogin({username:username, password:password}));
-     let linkDump = "/user/" + username;
-     history.push(linkDump);
 
+    dispatch(actions.submitLogin({username:username, password:password}));
 
+    let link = "/user/" + username;
+    history.push(link);
   };
 
 
@@ -40,7 +57,7 @@ export function Login () {
     <>
       <Helmet>
         <title>Login</title>
-        <meta name="description" content="Description of Login" />
+        <meta name="Login Form" content="Login User Form" />
       </Helmet>
       <Div>
       <Title>Login</Title>
@@ -64,15 +81,10 @@ export function Login () {
   );
 };
 
+
 const Title = styled.h1``;
-const Input = styled.input`
-    font-size: 16px;
-    outline: 0;
-    margin:0 0 10px 0 ;
-    `;
 const Div = styled.div`
-  margin-top:20px;
-  text-align:center;
+  max-width: 300px;
+  margin:auto auto;
 `;
-const Form = styled.form``;
-const Button = styled.button``;
+

@@ -1,3 +1,8 @@
+ /**
+ *
+ * Create User Selector
+ *
+ */
 import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from 'types';

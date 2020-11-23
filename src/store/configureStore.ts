@@ -10,27 +10,9 @@ import { createReducer } from './reducers';
 
 
 //PERSISTANT STORAGE
-import { createMigrate, persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session'; // defaults to localStorage for web
-import AsyncStorage from '@react-native-community/async-storage';
 
-
-
-const migrations = {
-  0: (state) => {
-    // migration clear out device state
-    return {
-      ...state,
-      device: undefined   
-    }
-  },
-  1: (state) => {
-    // migration to keep only device state
-    return {
-      device: state.device
-    }
-  }
-};
 
 
 const persistConfig = {
@@ -38,7 +20,6 @@ const persistConfig = {
   storage: storage,
   version: 0,
   whitelist: ['login']
-  // migrate: createMigrate(migrations, { debug: true })
 }
 
 
@@ -57,7 +38,7 @@ export function configureAppStore() {
     }),
   ];
 
-   const persistedReducer = persistReducer(persistConfig, createReducer());
+  const persistedReducer = persistReducer(persistConfig, createReducer());
 
   const store = configureStore({
     reducer: persistedReducer,
@@ -65,6 +46,7 @@ export function configureAppStore() {
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });
+  
   let persistor = persistStore(store);
 
   // Make reducers hot reloadable, see http://mxs.is/googmo

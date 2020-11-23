@@ -1,40 +1,47 @@
+/**
+ *
+ * Home Page
+ *
+ */
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Login } from '../AuthenicateUser/Login';
-import { Logout } from '../AuthenicateUser/Logout';
-import {selectUsername, selectAuthenicated } from '../AuthenicateUser/selectors';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey, actions } from '../AuthenicateUser/slice';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
+//Authenicate User container
+import { Login } from '../AuthenicateUser/Login';
+import { Logout } from '../AuthenicateUser/Logout';
+import {selectUsername, selectEmail, selectAuthenicated } from '../AuthenicateUser/selectors';
+import { reducer, sliceKey, actions } from '../AuthenicateUser/slice';
 
 export function HomePage() {
+
   useInjectReducer({ key: sliceKey, reducer: reducer });
+
   const username:string = useSelector(selectUsername);
+  const email:string = useSelector(selectEmail);
   const isAuthenicated:boolean = useSelector(selectAuthenicated);
+
   return (
     <>
       <Helmet>
         <title>Home Page</title>
-        <meta name="description" content="A Boilerplate application homepage" />
+        <meta name="Homepage" content="The Homepage" />
       </Helmet>
       <Div>
-Username: {username} <br />
-isAuthenicated: {isAuthenicated.toString()}
-  { isAuthenicated 
-  ? <Logout /> 
-  : <Login /> }
+  { isAuthenicated  ? <Logout user={username} email={email}  /> : <Login /> }
       </Div>
-
     </>
   );
 };
+
+
+
 const Div = styled.div`
     display: flex;
     height: 100%;
     flex-direction: column;
     margin-top:20px;
-    text-align:center;
 
 `;

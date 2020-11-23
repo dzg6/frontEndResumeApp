@@ -5,56 +5,44 @@
  */
 
 import React, { memo } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 import {   BrowserRouter as Router, NavLink } from "react-router-dom";
 
-interface Props {}
 
-export const NavBar = memo((props: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { t, i18n } = useTranslation();
+export const NavBar = () => {
+
 
   return (
     <>
       <Div>
-        
-      <NavLink
-      to="/">
-      <Text>Home</Text>
-      </NavLink>
+      <StyledLink
+      to="/"
+      activeClassName="selected">
+      Home
+      </StyledLink>
       </Div>
     </>
   );
-});
+};
 
 const Div = styled.div`
-background-color:yellow;
   margin-top:20px;
-      text-align: center;
+  text-align: center;
 `;
+const StyledLink = styled(NavLink)`
+cursor: pointer;
+text-decoration: none;
+display: flex-inline;
+padding: 0.25rem 1rem;
+font-size: 0.875rem;
+font-weight: 500;
+align-items: center;
 
-const Text = styled.a`
-  color: ${p => p.theme.primary};
-  cursor: pointer;
-  text-decoration: none;
-  display: flex-inline;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  align-items: center;
+&:hover {
+  opacity: 0.8;
+}
 
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    opacity: 0.4;
-  }
-
-  .icon {
-    margin-right: 0.25rem;
-  }
+&:active {
+  opacity: 0.4;
+}
 `;

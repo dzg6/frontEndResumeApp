@@ -1,4 +1,8 @@
-/* --- STATE --- */
+ /**
+ *
+ * Homepage Types
+ *
+ */
 export interface HomePageState {
   username:string;
   isAuthenicated: boolean;

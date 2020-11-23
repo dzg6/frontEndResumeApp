@@ -1,5 +1,6 @@
-import { LoginState } from 'app/containers/Login/types';
 import { HomePageState } from 'app/containers/HomePage/types';
+import { CreateUserState } from 'app/containers/CreateUser/types';
+import { UserState } from 'app/containers/AuthenicateUser/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -7,7 +8,8 @@ import { HomePageState } from 'app/containers/HomePage/types';
   You have to declare them here manually
 */
 export interface RootState {
-  login?: LoginState;
+  createUser?: CreateUserState;
   homepage?: HomePageState;
+  authenicateUser?: UserState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }
