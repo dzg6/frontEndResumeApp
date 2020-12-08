@@ -65,5 +65,6 @@
 }
 
 export function* loginSaga() {
-   yield takeLatest(actions.submitLogin.type, checkLogin);
+  // yield takeLatest(actions.submitLogin.type, checkLogin);
+   yield takeLatest(actions.submitLogin, checkLogin);
 }

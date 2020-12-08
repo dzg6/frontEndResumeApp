@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
-import styled, {css} from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useHistory } from "react-router-dom";
 
@@ -20,6 +20,7 @@ import { reducer, sliceKey, actions } from './slice';
 import {  Input } from "app/components/Input";
 import {  Button } from "app/components/Button";
 import {  Form } from "app/components/Form";
+import {  Label } from "app/components/Label";
 
 
 export function CreateUser() {
@@ -155,13 +156,3 @@ const Title = styled.h1``;
 const Div = styled.div`
 max-width: 300px;  
 margin: auto auto;`;
-
-const Label = styled.label`  
-color:green;      
-font-size: small;
-outline: 0;
-${props => props.fixMe && css`
-color: red;
-font-style:italic;
-`}
-`;

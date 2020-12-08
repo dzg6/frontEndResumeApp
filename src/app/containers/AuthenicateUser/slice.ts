@@ -28,7 +28,7 @@ const userSlice = createSlice({
       state.isAuthenicated = action.payload.isAuthenicated;
     },
 
-    submitLogin() {
+    submitLogin(username, password) {
       //Does not modify the state
     },
 

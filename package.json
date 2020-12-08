@@ -97,6 +97,7 @@
   },
   "husky": {
     "hooks": {
+    }
   },
   "jest": {
     "collectCoverageFrom": [

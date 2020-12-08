@@ -8,11 +8,7 @@ import { actions } from './slice';
 import { request } from 'utils/request';
 
 interface User {
-  payload:{
-    username:string,
-    password:string,
-    email:string
-  };
+  payload:string;
 }
 
  export function* createUser(user:User) {
@@ -65,5 +61,6 @@ interface User {
  }
 
 export function* createUserSaga() {
-   yield takeLatest(actions.createUser.type, createUser);
+  // yield takeLatest(actions.createUser.type, createUser);
+   yield takeLatest(actions.createUser, createUser);
 }
