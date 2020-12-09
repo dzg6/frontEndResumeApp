@@ -23,7 +23,7 @@ interface User {
 
   // TODO Encrypt PASSWORD
 
-  const requestURL = 'https://cors-anywhere.herokuapp.com/https://ou68ef4vrb.execute-api.us-east-1.amazonaws.com/prod/' + username;
+  const requestURL = 'https://ou68ef4vrb.execute-api.us-east-1.amazonaws.com/prod/' + username;
 
   const bodyParse = {
     username:username,
