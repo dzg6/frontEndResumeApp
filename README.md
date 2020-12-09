@@ -1,6 +1,8 @@
 # frontEndResumeApp
 An asynchronous login and create user form that connects to AWS lambda functions
 
+[Click here to see a live example hosted by AWS Amplify](https://main.doc9pi1uak7k5.amplifyapp.com/)
+
 ## Project Mission
 This project is made to display my ability to program front end web applications using React, redux, and redux-sagas. Please check out the [backEndResumeProject](https://github.com/dzg6/backEndResumeApp) to see the other half of the application.
 
