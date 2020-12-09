@@ -22,7 +22,7 @@ import { AuthenicateUser } from './containers/AuthenicateUser';
 export function App() {
 
   return (
-    <BrowserRouter basename="/React">
+    <BrowserRouter>
       <Helmet
         titleTemplate="%s - Mark's React App"
         defaultTitle="Mark's React App"

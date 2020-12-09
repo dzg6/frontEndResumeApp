@@ -22,7 +22,7 @@
        
   //TODO Encrypt password
 
-  const requestURL = 'https://ou68ef4vrb.execute-api.us-east-1.amazonaws.com/prod/' + username + '/login';
+  const requestURL = 'https://cors-anywhere.herokuapp.com/https://ou68ef4vrb.execute-api.us-east-1.amazonaws.com/prod/' + username + '/login';
 
   const requestBody = {
     username:username,
