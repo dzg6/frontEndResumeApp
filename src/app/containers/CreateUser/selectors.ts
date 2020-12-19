@@ -14,3 +14,7 @@ export const selectCreateUser = createSelector(
   [selectDomain],
   createUserState => createUserState,
 );
+export const selectStatus = createSelector(
+  [selectDomain],
+  createUserState => createUserState.status,
+);

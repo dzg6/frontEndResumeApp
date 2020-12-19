@@ -8,6 +8,7 @@ export interface UserState {
     password: string;
     email: string;
     status:{
+        code: number,
         msg:string,
     };
     isAuthenicated: boolean;

@@ -16,7 +16,6 @@
 
  export function* checkLogin(loginForm:Login) {
 
-       
   const username = loginForm.payload.username;
   const password = loginForm.payload.password;
        
@@ -48,12 +47,11 @@
 
     //Checks if local and server username match
     if(user.username === username.toLocaleLowerCase()){
-
       //Authenicated User Slice
       //If users match add user to react App
       yield put(actions.userLoggedIn(user));
-
     }
+    yield put(actions.userLoginError(user));
   }catch (err) {
     
     if (err.response?.status === 404) {

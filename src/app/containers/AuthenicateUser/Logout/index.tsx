@@ -13,6 +13,9 @@ import { useInjectReducer } from 'utils/redux-injectors';
 //Container Imports
 import { reducer, sliceKey, actions } from '../slice';
 
+//Create User container
+import {actions as loginAction } from '../../CreateUser/slice';
+
 interface Props {
   user: string;
   email: string;
@@ -29,6 +32,8 @@ export function Logout({ user, email }: Props) {
   */
   const dispatch = useDispatch();
   let history = useHistory();
+
+  dispatch(loginAction.reset());
 
   const onLogout = () => {
     dispatch(actions.logout());

@@ -14,17 +14,25 @@ import {  useHistory } from "react-router-dom";
 //Container Imports
 import { reducer, sliceKey, actions } from '../slice';
 import { loginSaga } from './saga';
+import { selectStatus } from '../selectors';
 
 //Component Imports
 import {  Link } from "app/components/Link";
 import {  Input } from "app/components/Input";
 import {  Button } from "app/components/Button";
 import {  Form } from "app/components/Form";
+import {  Label } from "app/components/Label";
+
+//Create User container
+import {selectStatus as createdUserMessage } from '../../CreateUser/selectors';
 
 export function Login () {
 
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: loginSaga });
+
+  const userCreated = useSelector(createdUserMessage);
+  const status = useSelector(selectStatus);
 
 
   /*### React Hooks v 16.8
@@ -53,6 +61,7 @@ export function Login () {
   };
 
 
+
   return (
     <>
       <Helmet>
@@ -61,6 +70,7 @@ export function Login () {
       </Helmet>
       <Div>
       <Title>Login</Title>
+      {userCreated.code === 301 ? <p>{userCreated.msg }!<br /> Please log in now. </p>: "" }
       <Form onSubmit={onLogin}>
       <Input 
           type="username" 
@@ -73,7 +83,9 @@ export function Login () {
           value={password}
           onChange={e => setPassword(e.target.value)}></Input><br />
       <Button
-      type="submit"> Submit </Button>
+      type="submit"> Submit </Button> <br />
+      { status.code === 301 ? <Label> {status.msg} </Label> : "" }
+      { status.code === 400 ? <Label fixMe> {status.msg} </Label> : "" }
       </Form>
       <Link to="/createuser">Sign Up </Link>
       </Div>

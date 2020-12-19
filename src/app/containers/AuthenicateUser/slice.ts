@@ -12,7 +12,7 @@ export const initialState: ContainerState = {
   username: 'empty',
   password: 'empty',
   email: 'empty',
-  status: {msg: 'empty'},
+  status: {code: 0, msg: ''},
   isAuthenicated: false,
 };
 
@@ -27,9 +27,13 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.isAuthenicated = action.payload.isAuthenicated;
     },
+    userLoginError(state, action: PayloadAction<any>) {
+      state.status = action.payload.status;
+    },
 
-    submitLogin(username, password) {
-      //Does not modify the state
+    submitLogin(state, action: PayloadAction<any>) {
+      state.status.code = 301;
+      state.status.msg = "logging in user..."
     },
 
     logout(state) {

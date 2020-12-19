@@ -12,7 +12,7 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useHistory } from "react-router-dom";
 
 //Container Imports
-import { selectCreateUser } from './selectors';
+import { selectCreateUser, selectStatus } from './selectors';
 import { createUserSaga } from './saga';
 import { reducer, sliceKey, actions } from './slice';
 
@@ -27,6 +27,9 @@ export function CreateUser() {
 
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: createUserSaga });
+
+  const selectStatusResponse = useSelector(selectStatus);
+
 
   /*
   ### React Hooks v 16.8
@@ -47,7 +50,6 @@ export function CreateUser() {
   let history = useHistory();
 
   const onSubmitForm = (e) => {
-    console.log(username)
     e.preventDefault();
     e.target.reset();
 
@@ -56,7 +58,12 @@ export function CreateUser() {
   //  let link = "/user/" + username;
   //  history.push(link);
   };
-
+  
+  if(selectStatusResponse.code === 200){
+    dispatch(actions.userCreated());
+    let link = "/"
+    history.push(link);
+  }
 
 /*
 ### Regex Validation Functions
@@ -143,7 +150,13 @@ export function CreateUser() {
 
           {/* Validate Submit */}
           {password  === confirmPassword && password && validateUsername(username) && validateEmail(email) ?<Button type="submit">Sign Up</Button>: <Button type="submit"  disabled>Sign Up</Button> }
+          <br />
+          { selectStatusResponse.code === 400 ? <Label fixMe> {selectStatusResponse.msg} </Label> : "" }
+          { selectStatusResponse.code === 200 ? <Label> {selectStatusResponse.msg} </Label> : "" }
+          { selectStatusResponse.code === 301 ? <Label> {selectStatusResponse.msg} </Label> : "" }
+
         </Form> 
+
       </Div>
     </>
   );

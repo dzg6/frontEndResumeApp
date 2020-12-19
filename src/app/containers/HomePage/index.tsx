@@ -23,6 +23,7 @@ export function HomePage() {
   const email:string = useSelector(selectEmail);
   const isAuthenicated:boolean = useSelector(selectAuthenicated);
 
+
   return (
     <>
       <Helmet>
